@@ -9,7 +9,6 @@ import { Form } from './Form/Form';
 import { Filter } from './Filter/Filter';
 import { fetchContacts } from 'operations/getAPI';
 import Loader from './Loader/Loader';
-
 import { GlobalStyle, Container, SubTitle } from './GlobalStyle';
 
 export const App = () => {
