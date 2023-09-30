@@ -12,7 +12,6 @@ import {
   Label,
 } from './Form.styled';
 
-
 // Synchronous validation function
 const validateName = value => {
   let errorMessage;
@@ -45,7 +44,7 @@ export const Form = () => {
     <Formik
       initialValues={{
         name: '',
-        phone: '',
+        number: '',
       }}
       onSubmit={(values, actions) => {
         dispatch(addContact({ ...values, id: nanoid() }));
@@ -62,14 +61,14 @@ export const Form = () => {
             placeholder="Taras Shevchenko"
           ></StyledField>
           {errors.name && touched.name ? <div>{errors.name}</div> : null}
-          <Label htmlFor="phone">Phone</Label>
+          <Label htmlFor="number">Phone</Label>
           <StyledField
             validate={validatePhone}
             type="tel"
-            name="phone"
+            name="number"
             placeholder="0501234567"
           ></StyledField>
-          {errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+          {errors.number && touched.number ? <div>{errors.number}</div> : null}
           <StyledFormButton type="submit">Add contact</StyledFormButton>
         </StyledForm>
       )}

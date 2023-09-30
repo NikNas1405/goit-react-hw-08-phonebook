@@ -1,49 +1,61 @@
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { GlobalStyle } from './GlobalStyle';
+import { SharedLayout } from './SharedLayout/SharedLayout';
+import { useDispatch } from 'react-redux';
+import { refreshData } from 'operations/getAPI';
+import { useAuth } from 'operations/useAuth';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
-import { selectContacts, selectIsLoading, selectError } from 'redux/selectors';
-import { ContactList } from './ContactList/ContactList';
-import { Form } from './Form/Form';
-import { Filter } from './Filter/Filter';
-import { fetchContacts } from 'operations/getAPI';
-import Loader from './Loader/Loader';
-import { GlobalStyle, Container, SubTitle } from './GlobalStyle';
+const HomePage = lazy(() => import('../pages/Home/Home'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const ContactsPage = lazy(() => import('../pages/Contacts'));
 
 export const App = () => {
-  const totalContacts = useSelector(selectContacts);
-
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  const { isRefreshing } = useAuth();
 
-  return (
-    <Container>
-      <h2>Phonebook</h2>
-      <Form />
-      <h2>Contacts</h2>
-      <Filter />
-      {error && (
-        <div>
-          We're sorry, an error has occurred. Please reload this page and try
-          again
-        </div>
-      )}
-      {isLoading && !error && <Loader />}
-      {!isLoading && totalContacts && (
-        <SubTitle>
-          {totalContacts.length} contacts are in the Phonebook
-        </SubTitle>
-      )}
-      {!isLoading && !error && <ContactList />}
-      <ToastContainer />
+  useEffect(() => {
+    dispatch(refreshData(), [dispatch]);
+  });
+
+  return !isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute
+                component={RegisterPage}
+                redirectTo="/contacts"
+              />
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
+            }
+          />
+
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute component={ContactsPage} redirectTo="/login" />
+            }
+          />
+
+          <Route path="*" element={<Navigate to="/" />} />
+        </Route>
+      </Routes>
       <GlobalStyle />
-    </Container>
+    </>
   );
 };

@@ -8,7 +8,7 @@ import {
   ButtonFilter,
 } from './Filter.styled';
 import { selectFilter } from 'redux/selectors';
-import { setFilters } from '../../redux/filters/filtersSlice';
+import { setFilters } from '../../redux/filtersSlice/filtersSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();

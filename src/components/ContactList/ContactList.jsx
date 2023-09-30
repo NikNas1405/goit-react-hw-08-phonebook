@@ -22,12 +22,11 @@ export const ContactList = () => {
   return (
     <Wrapper>
       <ContactListStyled>
-        {sortedVisibleContacts.map(({ id, name, phone }) => (
+        {sortedVisibleContacts.map(({ id, name, number }) => (
           <ContactListItem key={id}>
             <ContactListItemText>
-              {name}: {phone}
+              {name}: {number}
             </ContactListItemText>
-
             <ContactListItemDeleteButton
               onClick={() => dispatch(deleteContact(id))}
             >

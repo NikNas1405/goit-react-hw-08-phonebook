@@ -13,8 +13,8 @@ body {
 
   line-height: 1.5;
   color: #008080;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  /* padding-top: 30px;
+  padding-bottom: 30px; */
   background:  #f5fcf6 url(https://img.freepik.com/free-vector/leaves-background-with-metallic-foil_79603-956.jpg) 0 0 / cover no-repeat;
 }
 
@@ -36,15 +36,25 @@ h2 {
   color: #008080;
   margin: 0;
 }
-`;
 
+img {
+  display: block;
+  width: 100%;
+    height: 100%;
+  
+}
+`;
 export const Container = styled.div`
+  overflow: hidden;
+  margin: 0 auto;
+  text-align: center;
+`;
+export const ContactsFormWrapper = styled.div`
   max-width: 600px;
   max-height: 660px;
   overflow: hidden;
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto;
   text-align: center;
   padding: 20px;
   background-color: #fff;
