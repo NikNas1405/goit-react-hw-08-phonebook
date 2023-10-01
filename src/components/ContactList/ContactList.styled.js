@@ -39,6 +39,20 @@ export const ContactListItemText = styled.span`
   margin: 0;
 `;
 
+export const ContactListItemEditButton = styled.button`
+  margin-left: 30px;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  transition: transform 250ms ease;
+
+  &:is(:focus, :hover) {
+    transform: scale(1.1);
+  }
+`;
+
 export const ContactListItemDeleteButton = styled.button`
   margin-left: 30px;
   padding: 0;

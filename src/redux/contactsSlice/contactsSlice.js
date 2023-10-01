@@ -2,7 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { initialState } from '../initialState';
-import { fetchContacts, addContact, deleteContact } from 'operations/getAPI';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  editContact,
+} from 'operations/getAPI';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -50,6 +55,22 @@ const handleDeleteContactFulfilled = (state, action) => {
   state.items.splice(index, 1);
 };
 
+const handleEditContactFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  const index = state.items.findIndex(
+    contact => contact.id === action.payload.id
+  );
+  state.items[index] = action.payload;
+};
+
+// updateContact: (state, action) => {
+//     const { id, number, name } = action.payload;
+//     state.items = state.items.map(contact =>
+//       contact.id === id ? { ...contact, number, name } : contact
+//     );
+//   },
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialState.contacts,
@@ -64,7 +85,10 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, handleDeleteContactFulfilled)
-      .addCase(deleteContact.rejected, handleRejected),
+      .addCase(deleteContact.rejected, handleRejected)
+      .addCase(editContact.pending, handlePending)
+      .addCase(editContact.fulfilled, handleEditContactFulfilled)
+      .addCase(editContact.rejected, handleRejected),
 });
 
 // // Редюсер слайсу
