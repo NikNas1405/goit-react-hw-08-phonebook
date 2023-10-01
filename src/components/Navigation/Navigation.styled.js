@@ -8,6 +8,17 @@ export const NavLinkStyled = styled(NavLink)`
   color: #2a363b;
 
   &.active {
-    color: #e84a5f;
+    color: #fff;
+  }
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    left: 0px;
+    top: 40px;
+    background-color: #fff;
+    border-radius: 2px;
   }
 `;

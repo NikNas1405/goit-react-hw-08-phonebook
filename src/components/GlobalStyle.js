@@ -49,7 +49,8 @@ export const Container = styled.div`
   margin: 0 auto;
   text-align: center;
 `;
-export const ContactsFormWrapper = styled.div`
+
+export const FormWrapper = styled.div`
   max-width: 600px;
   max-height: 660px;
   overflow: hidden;

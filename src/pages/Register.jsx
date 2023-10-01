@@ -1,10 +1,10 @@
-import { RegisterForm } from '../components/index';
+import { RegisterForm, FormWrapper } from '../components/index';
 
 export default function Register() {
   return (
-    <div>
+    <FormWrapper>
       <h2>Registration</h2>
       <RegisterForm />
-    </div>
+    </FormWrapper>
   );
 }

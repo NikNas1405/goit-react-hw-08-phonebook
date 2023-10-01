@@ -1,10 +1,10 @@
-import { LoginForm } from '../components/index';
+import { LoginForm, FormWrapper } from '../components/index';
 
 export default function Login() {
   return (
-    <div>
+    <FormWrapper>
       <h2>Login</h2>
       <LoginForm />
-    </div>
+    </FormWrapper>
   );
 }

@@ -7,7 +7,7 @@ import { fetchContacts } from 'operations/getAPI';
 import {
   Filter,
   Form,
-  ContactsFormWrapper,
+  FormWrapper,
   SubTitle,
   Loader,
   ContactList,
@@ -24,7 +24,7 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <ContactsFormWrapper>
+    <FormWrapper>
       <h2>Phonebook</h2>
       <Form />
 
@@ -43,6 +43,6 @@ export default function Contacts() {
         </SubTitle>
       )}
       {!isLoading && !error && <ContactList />}
-    </ContactsFormWrapper>
+    </FormWrapper>
   );
 }

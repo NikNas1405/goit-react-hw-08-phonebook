@@ -1,4 +1,6 @@
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 import { logIn } from 'operations/authAPI';
 
@@ -19,14 +21,96 @@ export const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit} autoComplete="on">
       <label>
-        Email
-        <input type="email" name="email" />
+        <TextField
+          margin="normal"
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+        />
       </label>
       <label>
-        Password
-        <input type="password" name="password" />
+        <TextField
+          margin="normal"
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+        />
       </label>
-      <button type="submit">Log in</button>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2, backgroundColor: '#008080' }}
+      >
+        Sign In
+      </Button>
     </form>
   );
 };
+
+// import Button from '@mui/material/Button';
+// import TextField from '@mui/material/TextField';
+// import Box from '@mui/material/Box';
+// import { useDispatch } from 'react-redux';
+
+// import { logIn } from 'operations/authAPI';
+
+// export const LoginForm = () => {
+//   const dispatch = useDispatch();
+
+//   const handleSubmit = event => {
+//     event.preventDefault();
+//     dispatch(
+//       logIn({
+//         email: event.currentTarget.elements.email.value,
+//         password: event.currentTarget.elements.password.value,
+//       })
+//     );
+//     event.currentTarget.reset();
+//   };
+
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//       }}
+//     >
+//       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+//         <TextField
+//           margin="normal"
+//           fullWidth
+//           id="email"
+//           label="Email Address"
+//           name="email"
+//           autoComplete="email"
+//           autoFocus
+//         />
+//         <TextField
+//           margin="normal"
+//           fullWidth
+//           name="password"
+//           label="Password"
+//           type="password"
+//           id="password"
+//           autoComplete="current-password"
+//         />
+//         <Button
+//           type="submit"
+//           fullWidth
+//           variant="contained"
+//           sx={{ mt: 3, mb: 2, backgroundColor: '#008080' }}
+//         >
+//           Sign In
+//         </Button>
+//       </Box>
+//     </Box>
+//   );
+// };
