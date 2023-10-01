@@ -1,8 +1,8 @@
-import { AppBar, Box, List, ListItem, Typography } from '@mui/material';
+import { AppBar, Box, } from '@mui/material';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useAuth } from '../../operations/useAuth';
-import { NavLinkStyled } from './AppBarComponent.styled';
+import { Navigation } from 'components/Navigation/Navigation';
 
 export const AppBarComponent = () => {
   const { isLoggedIn } = useAuth();
@@ -17,25 +17,7 @@ export const AppBarComponent = () => {
         }}
         component={'div'}
       >
-        <List
-          sx={{
-            display: 'flex',
-            marginLeft: '30px',
-          }}
-        >
-          <ListItem>
-            <Typography>
-              <NavLinkStyled to="/">Home</NavLinkStyled>
-            </Typography>
-          </ListItem>
-          <ListItem>
-            {isLoggedIn && (
-              <Typography>
-                <NavLinkStyled to="contacts">Contacts</NavLinkStyled>
-              </Typography>
-            )}
-          </ListItem>
-        </List>
+        <Navigation />
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </Box>
     </AppBar>
