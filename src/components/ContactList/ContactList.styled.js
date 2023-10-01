@@ -52,3 +52,14 @@ export const ContactListItemDeleteButton = styled.button`
     transform: scale(1.1);
   }
 `;
+
+export const ImageHolder = styled.div`
+  height: 120px;
+  width: 120px;
+  margin: 0 auto;
+  overflow: hidden;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;

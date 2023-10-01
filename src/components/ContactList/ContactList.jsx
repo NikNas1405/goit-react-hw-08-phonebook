@@ -10,7 +10,12 @@ import {
   ContactListItemText,
   ContactListItemDeleteButton,
   Wrapper,
+  ImageHolder,
 } from './ContactList.styled.js';
+
+import { SubTitle } from '../index.js';
+
+import error from '../Images/error.jpg';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -19,22 +24,40 @@ export const ContactList = () => {
     (a, b) => (a.name > b.name ? 1 : -1)
   );
 
+  console.log(sortedVisibleContacts.length);
+
   return (
     <Wrapper>
-      <ContactListStyled>
-        {sortedVisibleContacts.map(({ id, name, number }) => (
-          <ContactListItem key={id}>
-            <ContactListItemText>
-              {name}: {number}
-            </ContactListItemText>
-            <ContactListItemDeleteButton
-              onClick={() => dispatch(deleteContact(id))}
-            >
-              <CiTrash />
-            </ContactListItemDeleteButton>
-          </ContactListItem>
-        ))}
-      </ContactListStyled>
+      {sortedVisibleContacts.length !== 0 ? (
+        <>
+          <SubTitle>
+            {sortedVisibleContacts.length} contacts are in the Phonebook
+          </SubTitle>
+          <ContactListStyled>
+            {sortedVisibleContacts.map(({ id, name, number }) => (
+              <ContactListItem key={id}>
+                <ContactListItemText>
+                  {name}: {number}
+                </ContactListItemText>
+                <ContactListItemDeleteButton
+                  onClick={() => dispatch(deleteContact(id))}
+                >
+                  <CiTrash />
+                </ContactListItemDeleteButton>
+              </ContactListItem>
+            ))}
+          </ContactListStyled>
+        </>
+      ) : (
+        <>
+          <SubTitle>
+            Ooops, there aren`t any saved contacts, Let`s change it.
+          </SubTitle>
+          <ImageHolder>
+            <img src={error} alt="sad cat with phone" />
+          </ImageHolder>
+        </>
+      )}
     </Wrapper>
   );
 };

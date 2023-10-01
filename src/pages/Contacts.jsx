@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
+import { selectError, selectIsLoading } from 'redux/selectors';
 import { fetchContacts } from 'operations/getAPI';
 
 import {
   Filter,
   Form,
   FormWrapper,
-  SubTitle,
   Loader,
   ContactList,
 } from '../components/index';
@@ -16,7 +15,6 @@ import {
 export default function Contacts() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const totalContacts = useSelector(selectContacts);
   const error = useSelector(selectError);
 
   useEffect(() => {
@@ -36,11 +34,6 @@ export default function Contacts() {
       )}
       {!isLoading && <h2>Your contacts</h2>}
       {!isLoading && <Filter />}
-      {!isLoading && totalContacts && (
-        <SubTitle>
-          {totalContacts.length} contacts are in the Phonebook
-        </SubTitle>
-      )}
       {!isLoading && !error && <ContactList />}
     </FormWrapper>
   );
