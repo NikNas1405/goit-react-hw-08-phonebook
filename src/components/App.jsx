@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { useDispatch } from 'react-redux';
-import { refreshData } from 'operations/getAPI';
+import { refreshData } from 'operations/authAPI';
 import { useAuth } from 'operations/useAuth';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
@@ -19,43 +19,46 @@ export const App = () => {
   const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(refreshData(), [dispatch]);
-  });
+    dispatch(refreshData());
+  }, [dispatch]);
 
-  return !isRefreshing ? (
-    <b>Refreshing user...</b>
-  ) : (
-    <>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomePage />} />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                component={RegisterPage}
-                redirectTo="/contacts"
-              />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
-            }
-          />
+  return (
+    !isRefreshing && (
+      // ? (
+      // <b>Refreshing user...</b>
+      // ) :
+      <>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<HomePage />} />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  component={RegisterPage}
+                  redirectTo="/contacts"
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
+              }
+            />
 
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute component={ContactsPage} redirectTo="/login" />
-            }
-          />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute component={ContactsPage} redirectTo="/login" />
+              }
+            />
 
-          <Route path="*" element={<Navigate to="/" />} />
-        </Route>
-      </Routes>
-      <GlobalStyle />
-    </>
+            <Route path="*" element={<Navigate to="/" />} />
+          </Route>
+        </Routes>
+        <GlobalStyle />
+      </>
+    )
   );
 };

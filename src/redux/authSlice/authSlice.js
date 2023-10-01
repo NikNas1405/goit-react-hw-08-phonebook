@@ -3,7 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import { initialState } from '../initialState';
-import { register, logIn, logOut, refreshData } from 'operations/getAPI';
+import { register, logIn, logOut, refreshData } from 'operations/authAPI';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -27,7 +27,7 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
       })
       .addCase(refreshData.pending, state => {
-      state.isRefreshing = true;
+        state.isRefreshing = true;
       })
       .addCase(refreshData.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -38,7 +38,6 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       }),
 });
-// // Редюсер слайсу
 
 const authPersistConfig = {
   key: 'auth',

@@ -7,3 +7,4 @@ export * from 'components/Form/Form';
 export * from 'components/Filter/Filter';
 export * from 'components/ContactList/ContactList';
 export * from 'components/AuthNav/AuthNav';
+export * from 'components/Navigation/Navigation';

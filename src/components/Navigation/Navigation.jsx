@@ -1,4 +1,4 @@
-import { List, ListItem, Typography } from '@mui/material';
+import { List, ListItem } from '@mui/material';
 
 import { useAuth } from '../../operations/useAuth';
 import { NavLinkStyled } from './Navigation.styled';
@@ -14,16 +14,10 @@ export const Navigation = () => {
       }}
     >
       <ListItem>
-        <Typography>
-          <NavLinkStyled to="/">Home</NavLinkStyled>
-        </Typography>
+        <NavLinkStyled to="/">Home</NavLinkStyled>
       </ListItem>
       <ListItem>
-        {isLoggedIn && (
-          <Typography>
-            <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>
-          </Typography>
-        )}
+        {isLoggedIn && <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>}
       </ListItem>
     </List>
   );
