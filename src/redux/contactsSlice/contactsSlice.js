@@ -58,18 +58,17 @@ const handleDeleteContactFulfilled = (state, action) => {
 const handleEditContactFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  const index = state.items.findIndex(
-    contact => contact.id === action.payload.id
-  );
-  state.items[index] = action.payload;
-};
 
-// updateContact: (state, action) => {
-//     const { id, number, name } = action.payload;
-//     state.items = state.items.map(contact =>
-//       contact.id === id ? { ...contact, number, name } : contact
-//     );
-//   },
+  const { id, number, name } = action.payload;
+  state.items = state.items.map(contact =>
+    contact.id === id ? { ...contact, number, name } : contact
+  );
+
+  // const index = state.items.findIndex(
+  //   contact => contact.id === action.payload.id
+  // );
+  // state.items[index] = action.payload;
+};
 
 const contactsSlice = createSlice({
   name: 'contacts',

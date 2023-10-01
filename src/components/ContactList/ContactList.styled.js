@@ -77,3 +77,8 @@ export const ImageHolder = styled.div`
     height: 100%;
   }
 `;
+
+export const Form = styled.form`
+  display: flex;
+  gap: 4px;
+`;

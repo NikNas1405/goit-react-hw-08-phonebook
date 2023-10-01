@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { CiTrash, CiEdit } from 'react-icons/ci';
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 import { deleteContact, editContact } from 'operations/getAPI.js';
 import { selectVisibleContacts } from 'redux/selectors';
 
@@ -12,6 +15,7 @@ import {
   ContactListItemDeleteButton,
   Wrapper,
   ImageHolder,
+  Form,
 } from './ContactList.styled.js';
 
 import { SubTitle } from '../index.js';
@@ -27,8 +31,6 @@ export const ContactList = () => {
   const sortedVisibleContacts = useSelector(selectVisibleContacts).sort(
     (a, b) => (a.name > b.name ? 1 : -1)
   );
-
-  console.log(sortedVisibleContacts.length);
 
   const changeItem = (event, id) => {
     event.preventDefault();
@@ -71,15 +73,31 @@ export const ContactList = () => {
                     </ContactListItemDeleteButton>
                   </>
                 ) : (
-                  <form key={id} onSubmit={event => changeItem(event, id)}>
+                  <Form
+                    key={id}
+                    onSubmit={event => changeItem(event, id)}
+                    autoComplete="off"
+                  >
                     <label>
-                      <input type="text" name="name" defaultValue={name} />
+                      <TextField
+                        label="Name"
+                        name="name"
+                        type="text"
+                        defaultValue={name}
+                      />
                     </label>
                     <label>
-                      <input type="text" name="number" defaultValue={number} />
+                      <TextField
+                        label="Number"
+                        name="number"
+                        type="tel"
+                        defaultValue={number}
+                      />
                     </label>
-                    <button type="submit">Change</button>
-                  </form>
+                    <Button type="submit" sx={{ mt: 3, mb: 2 }}>
+                      Change
+                    </Button>
+                  </Form>
                 )}
               </ContactListItem>
             ))}

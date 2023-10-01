@@ -20,7 +20,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="on">
+    <form onSubmit={handleSubmit}>
       <label>
         <TextField
           margin="normal"
