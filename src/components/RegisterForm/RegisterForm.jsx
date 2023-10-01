@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import { register } from 'operations/authAPI';
+import { NavLink } from 'react-router-dom';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,8 @@ export const RegisterForm = () => {
       >
         Sign Up
       </Button>
+
+      <NavLink to="/login">Already have an account? Sign in </NavLink>
     </form>
   );
 };

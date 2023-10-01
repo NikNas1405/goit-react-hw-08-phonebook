@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import { logIn } from 'operations/authAPI';
+import { NavLink } from 'react-router-dom';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ export const LoginForm = () => {
       >
         Sign In
       </Button>
+      <NavLink to="/register">Don't have an account? Sign Up </NavLink>
     </form>
   );
 };
