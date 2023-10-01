@@ -27,16 +27,15 @@ export default function Contacts() {
     <FormWrapper>
       <h2>Phonebook</h2>
       <Form />
-
-      <h2>Your contacts</h2>
-      <Filter />
+      {isLoading && !error && <Loader />}
       {error && (
         <div>
           We're sorry, an error has occurred. Please reload this page and try
           again
         </div>
       )}
-      {isLoading && !error && <Loader />}
+      {!isLoading && <h2>Your contacts</h2>}
+      {!isLoading && <Filter />}
       {!isLoading && totalContacts && (
         <SubTitle>
           {totalContacts.length} contacts are in the Phonebook

@@ -27,14 +27,14 @@ const handleAddContactFulfilled = (state, action) => {
     contact => contact.name === action.payload.name
   );
   const checkNumber = state.items.find(
-    contact => contact.phone === action.payload.phone
+    contact => contact.number === action.payload.number
   );
   if (checkName) {
     toast.error(`${action.payload.name} is already in contacts.`);
     return state;
   }
   if (checkNumber) {
-    toast.error(`${action.payload.phone} is already in contacts.`);
+    toast.error(`${action.payload.number} is already in contacts.`);
     return state;
   }
 
@@ -65,50 +65,6 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, handleDeleteContactFulfilled)
       .addCase(deleteContact.rejected, handleRejected),
-
-  // }
-  // extraReducers: {
-  //   [fetchContacts.pending]: handlePending,
-  //   [fetchContacts.fulfilled](state, action) {
-  //     state.isLoading = false;
-  //     state.error = null;
-  //     state.items = action.payload;
-  //   },
-  //   [fetchContacts.rejected]: handleRejected,
-
-  // [addContact.pending]: handlePending,
-  // [addContact.fulfilled](state, action) {
-  //   state.isLoading = false;
-  //   state.error = null;
-  //   const checkName = state.find(
-  //     contact => contact.name === action.payload.name
-  //   );
-
-  //   const checkNumber = state.find(
-  //     contact => contact.phone === action.payload.phone
-  //   );
-
-  //   if (checkName) {
-  //     toast.error(`${action.payload.name} is already in contacts.`);
-  //     return state;
-  //   }
-  //   if (checkNumber) {
-  //     toast.error(`${action.payload.phone} is already in contacts.`);
-  //     return state;
-  //   }
-  //   state.items.push(action.payload);
-  // },
-  //   [addContact.rejected]: handleRejected,
-  //   [deleteContact.pending]: handlePending,
-  //   [deleteContact.fulfilled](state, action) {
-  //     state.isLoading = false;
-  //     state.error = null;
-  //     const index = state.items.findIndex(
-  //       task => task.id === action.payload.id
-  //     );
-  //     state.items.splice(index, 1);
-  //   },
-  //   [deleteContact.rejected]: handleRejected,
 });
 
 // // Редюсер слайсу
